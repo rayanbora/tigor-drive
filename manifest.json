@@ -1,9 +1,17 @@
 {
-  "name":"Tigor Drive",
-  "short_name":"Tigor Drive",
-  "start_url":"./",
-  "display":"standalone",
-  "background_color":"#071015",
-  "theme_color":"#071015",
-  "orientation":"landscape"
+  "name": "Tigor Drive",
+  "short_name": "Tigor Drive",
+  "description": "A CarPlay-inspired dashboard for launching Google Maps, Spotify and calls from a mounted iPhone.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
+  "orientation": "landscape",
+  "background_color": "#070c0f",
+  "theme_color": "#070c0f",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
 }
