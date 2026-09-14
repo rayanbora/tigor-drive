@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050608">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tigor Drive">
+<title>Tigor Drive 2</title>
+<style>
+:root{--bg:#050608;--panel:#0d0f12;--panel2:#14171b;--line:#252a31;--muted:#8e969f;--text:#f5f7fa;--accent:#35d46f}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;overflow:hidden}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.app{height:100%;display:grid;grid-template-rows:1fr 118px;min-height:0}
+.main{position:relative;min-height:0;overflow:hidden;background:#101316}
+.map{position:absolute;inset:0;background:
+radial-gradient(circle at 55% 45%,#293038 0 2%,transparent 2.4%),
+linear-gradient(25deg,transparent 45%,#333a41 45.5%,#333a41 47%,transparent 47.5%),
+linear-gradient(115deg,transparent 42%,#30363d 42.5%,#30363d 44%,transparent 44.5%),
+linear-gradient(0deg,transparent 69%,#30363d 69.5%,#30363d 71%,transparent 71.5%);
+background-size:auto,190px 190px,230px 230px,250px 250px}
+.route{position:absolute;left:50%;top:7%;height:88%;width:8px;background:var(--accent);border-radius:10px;transform:rotate(-17deg);box-shadow:0 0 18px rgba(53,212,111,.35)}
+.route:before,.route:after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;border:2px solid rgba(53,212,111,.55)}
+.route:before{top:26%}.route:after{bottom:12%}
+.car{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%) rotate(-17deg);font-size:48px;filter:drop-shadow(0 4px 6px #000)}
+.header{position:absolute;left:14px;right:14px;top:14px;display:flex;justify-content:space-between;gap:12px;z-index:3}
+.glass{background:rgba(9,11,13,.86);border:1px solid var(--line);backdrop-filter:blur(18px);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.brand{padding:10px 13px}.brand b{font-size:14px}.brand small{display:block;color:var(--muted);margin-top:3px}
+.stats{display:flex;gap:7px}.stat{padding:9px 12px;text-align:center;min-width:67px}.stat b{font-size:18px}.stat small{display:block;font-size:9px;color:var(--muted);margin-top:2px}
+.navcard{position:absolute;left:14px;bottom:18px;z-index:3;padding:12px 14px;max-width:56%;min-width:230px}.navrow{display:flex;align-items:center;gap:10px}.turn{font-size:30px}.navcard b{font-size:14px}.navcard small{display:block;color:var(--muted);margin-top:4px}
+.bottom{background:#090b0e;border-top:1px solid var(--line);display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:10px;padding:10px 12px}
+.music{display:flex;align-items:center;gap:10px;min-width:0}.album{width:54px;height:54px;border-radius:11px;background:linear-gradient(135deg,#272c33,#090a0c);display:grid;place-items:center;font-size:25px;border:1px solid #30353c;flex:none}.track{min-width:0}.track b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track small{display:block;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.controls{display:flex;align-items:center;justify-content:center;gap:7px}.btn,.launch{height:50px;border:1px solid #30353c;background:var(--panel2);color:#fff;border-radius:14px;font-weight:700}.btn{width:50px;font-size:20px}.play{width:58px;font-size:22px}.launches{display:flex;align-items:center;justify-content:flex-end;gap:7px}.launch{padding:0 13px;font-size:12px}.launch.maps{border-color:#315c46}.launch.spotify{border-color:#315c46}
+.help{position:absolute;right:14px;bottom:18px;z-index:4;padding:8px 10px;color:var(--muted);font-size:10px}
+@media(max-width:800px){.app{grid-template-rows:1fr 104px}.stats .stat:nth-child(3){display:none}.navcard{max-width:65%}.bottom{grid-template-columns:1fr 1fr}.launches{display:none}.title{font-size:13px}.album{width:46px;height:46px}.btn{height:44px;width:44px}.play{width:52px}}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="main">
+<div class="map"></div><div class="route"></div><div class="car">🚗</div>
+<header class="header">
+<div class="glass brand"><b>TIGOR DRIVE</b><small id="status">Ready for driving</small></div>
+<div class="stats">
+<div class="glass stat"><b id="speed">--</b><small>KM/H</small></div>
+<div class="glass stat"><b id="clock">--:--</b><small>TIME</small></div>
+<div class="glass stat"><b id="battery">--%</b><small>BATTERY</small></div>
+</div>
+</header>
+<div class="glass navcard">
+<div class="navrow"><span class="turn">↗</span><div><b>Google Maps</b><small id="navhint">Tap below to start navigation</small></div></div>
+</div>
+<div class="glass help">Phone dashboard • landscape</div>
+</section>
+<footer class="bottom">
+<div class="music"><div class="album">♫</div><div class="track"><b id="song">Spotify</b><small id="artist">Open Spotify to choose music</small></div></div>
+<div class="controls"><button class="btn" id="prev">⏮</button><button class="btn play" id="play">▶</button><button class="btn" id="next">⏭</button></div>
+<div class="launches"><button class="launch maps" id="maps">MAPS</button><button class="launch spotify" id="spotify">SPOTIFY</button></div>
+</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+function updateClock(){$("clock").textContent=new Intl.DateTimeFormat([], {hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date())}
+setInterval(updateClock,1000);updateClock();
+
+async function battery(){
+ try{const b=await navigator.getBattery();$("battery").textContent=Math.round(b.level*100)+"%";b.addEventListener("levelchange",()=>$("battery").textContent=Math.round(b.level*100)+"%")}
+ catch(e){$("battery").textContent="—"}
+} battery();
+
+if(navigator.geolocation){
+ navigator.geolocation.watchPosition(p=>{
+   $("status").textContent="GPS connected";
+   const s=p.coords.speed;
+   $("speed").textContent=(typeof s==="number"&&s>=0)?Math.round(s*3.6):"0";
+ },()=>{$("status").textContent="Allow Location for speed";$("speed").textContent="—"},
+ {enableHighAccuracy:true,maximumAge:1500,timeout:7000});
+}
+function launch(url){location.href=url}
+$("maps").onclick=()=>launch("comgooglemaps://");
+$("spotify").onclick=()=>launch("spotify:");
+$("play").onclick=()=>launch("spotify:");
+$("prev").onclick=()=>launch("spotify:");
+$("next").onclick=()=>launch("spotify:");
+$("navhint").onclick=()=>launch("comgooglemaps://");
+</script>
+</body></html>
