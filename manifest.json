@@ -1,1 +1,9 @@
-{"name":"Tigor Drive","short_name":"Tigor Drive","start_url":"./","display":"standalone","background_color":"#050608","theme_color":"#050608","orientation":"landscape","icons":[]}
+{
+  "name":"Tigor Drive",
+  "short_name":"Tigor Drive",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#071015",
+  "theme_color":"#071015",
+  "orientation":"landscape"
+}

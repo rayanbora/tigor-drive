@@ -1,13 +1,19 @@
-# Tigor Drive v2
+# Tigor Drive v3
 
-A free, iPhone-landscape driving dashboard prototype.
+CarPlay-inspired landscape dashboard for iPhone.
 
-## iPhone use
-1. Host this folder on a static HTTPS host (GitHub Pages, Cloudflare Pages, Netlify, etc.).
-2. Open the URL in Safari.
-3. Use Share -> Add to Home Screen.
-4. Open Tigor Drive from the Home Screen and rotate the phone to landscape.
-5. Allow Location for GPS speed.
+## Install
+Open the GitHub Pages URL in Safari and use Share -> Add to Home Screen.
 
-## Important
-A regular web/PWA cannot embed the full Google Maps navigation UI or Spotify's full app UI. The MAPS and SPOTIFY buttons use iOS deep links to open those apps. Spotify Free limitations still apply.
+## What works
+- Landscape dashboard with left app dock
+- Google Maps launch/deep link
+- Spotify launch/deep link
+- Phone launch
+- GPS speed
+- Battery percentage where iOS exposes it
+- Clock
+- Optional free weather using Open-Meteo when GPS permission is available
+
+## Important iOS limitation
+A normal website/PWA cannot reproduce Apple's CarPlay environment or embed the complete Google Maps/Spotify native app interfaces. This version therefore provides a CarPlay-like shell and opens the native apps when you tap their icons. Spotify playback remains subject to Spotify's own Free/Premium rules.

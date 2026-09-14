@@ -3,85 +3,136 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050608">
+<meta name="theme-color" content="#071015">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Tigor Drive">
-<title>Tigor Drive 2</title>
+<link rel="manifest" href="manifest.json">
+<title>Tigor Drive</title>
 <style>
-:root{--bg:#050608;--panel:#0d0f12;--panel2:#14171b;--line:#252a31;--muted:#8e969f;--text:#f5f7fa;--accent:#35d46f}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;overflow:hidden}
+:root{--bg:#071015;--panel:#11191e;--panel2:#172127;--line:#2b363d;--text:#f6f8fa;--muted:#9ba5ab;--accent:#42d873}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
 body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
-.app{height:100%;display:grid;grid-template-rows:1fr 118px;min-height:0}
-.main{position:relative;min-height:0;overflow:hidden;background:#101316}
-.map{position:absolute;inset:0;background:
-radial-gradient(circle at 55% 45%,#293038 0 2%,transparent 2.4%),
-linear-gradient(25deg,transparent 45%,#333a41 45.5%,#333a41 47%,transparent 47.5%),
-linear-gradient(115deg,transparent 42%,#30363d 42.5%,#30363d 44%,transparent 44.5%),
-linear-gradient(0deg,transparent 69%,#30363d 69.5%,#30363d 71%,transparent 71.5%);
-background-size:auto,190px 190px,230px 230px,250px 250px}
-.route{position:absolute;left:50%;top:7%;height:88%;width:8px;background:var(--accent);border-radius:10px;transform:rotate(-17deg);box-shadow:0 0 18px rgba(53,212,111,.35)}
-.route:before,.route:after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;border:2px solid rgba(53,212,111,.55)}
-.route:before{top:26%}.route:after{bottom:12%}
-.car{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%) rotate(-17deg);font-size:48px;filter:drop-shadow(0 4px 6px #000)}
-.header{position:absolute;left:14px;right:14px;top:14px;display:flex;justify-content:space-between;gap:12px;z-index:3}
-.glass{background:rgba(9,11,13,.86);border:1px solid var(--line);backdrop-filter:blur(18px);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.25)}
-.brand{padding:10px 13px}.brand b{font-size:14px}.brand small{display:block;color:var(--muted);margin-top:3px}
-.stats{display:flex;gap:7px}.stat{padding:9px 12px;text-align:center;min-width:67px}.stat b{font-size:18px}.stat small{display:block;font-size:9px;color:var(--muted);margin-top:2px}
-.navcard{position:absolute;left:14px;bottom:18px;z-index:3;padding:12px 14px;max-width:56%;min-width:230px}.navrow{display:flex;align-items:center;gap:10px}.turn{font-size:30px}.navcard b{font-size:14px}.navcard small{display:block;color:var(--muted);margin-top:4px}
-.bottom{background:#090b0e;border-top:1px solid var(--line);display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:10px;padding:10px 12px}
-.music{display:flex;align-items:center;gap:10px;min-width:0}.album{width:54px;height:54px;border-radius:11px;background:linear-gradient(135deg,#272c33,#090a0c);display:grid;place-items:center;font-size:25px;border:1px solid #30353c;flex:none}.track{min-width:0}.track b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track small{display:block;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.controls{display:flex;align-items:center;justify-content:center;gap:7px}.btn,.launch{height:50px;border:1px solid #30353c;background:var(--panel2);color:#fff;border-radius:14px;font-weight:700}.btn{width:50px;font-size:20px}.play{width:58px;font-size:22px}.launches{display:flex;align-items:center;justify-content:flex-end;gap:7px}.launch{padding:0 13px;font-size:12px}.launch.maps{border-color:#315c46}.launch.spotify{border-color:#315c46}
-.help{position:absolute;right:14px;bottom:18px;z-index:4;padding:8px 10px;color:var(--muted);font-size:10px}
-@media(max-width:800px){.app{grid-template-rows:1fr 104px}.stats .stat:nth-child(3){display:none}.navcard{max-width:65%}.bottom{grid-template-columns:1fr 1fr}.launches{display:none}.title{font-size:13px}.album{width:46px;height:46px}.btn{height:44px;width:44px}.play{width:52px}}
+.shell{height:100%;display:grid;grid-template-columns:78px 1fr;gap:12px;padding:10px;background:radial-gradient(circle at 70% 20%,#15272d 0,#071015 48%,#05090c 100%)}
+.dock{border:1px solid #263238;background:rgba(12,18,22,.92);border-radius:24px;display:flex;flex-direction:column;align-items:center;padding:12px 9px;gap:12px;box-shadow:0 15px 40px #0007;backdrop-filter:blur(20px)}
+.dock button{width:54px;height:54px;border:0;border-radius:16px;background:#06090b;color:#fff;font-size:25px;display:grid;place-items:center;cursor:pointer}
+.dock button.active{outline:3px solid #4e79ff;box-shadow:0 0 0 5px #17243d}
+.dock .apps{margin-top:auto}
+.content{min-width:0;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.9fr);grid-template-rows:1fr 148px;gap:12px}
+.card{border:1px solid #263238;background:rgba(13,20,24,.9);border-radius:22px;overflow:hidden;box-shadow:0 15px 40px #0006;backdrop-filter:blur(18px)}
+.map{position:relative;min-width:0;background:#1c2b45}
+.mapbg{position:absolute;inset:0;background:
+linear-gradient(28deg,transparent 42%,#52637c 42.5%,#52637c 45%,transparent 45.5%),
+linear-gradient(116deg,transparent 48%,#596a82 48.5%,#596a82 51%,transparent 51.5%),
+linear-gradient(0deg,transparent 65%,#485b73 65.5%,#485b73 68%,transparent 68.5%),
+linear-gradient(90deg,transparent 24%,#33465f 24.5%,#33465f 26%,transparent 26.5%);
+background-size:210px 210px,240px 240px,260px 260px,300px 300px;filter:saturate(.8)}
+.mapbg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 53% 55%,transparent 0 16%,#17283d22 17% 100%)}
+.maproute{position:absolute;width:9px;height:82%;left:51%;top:8%;background:#4c83ff;border-radius:20px;transform:rotate(-18deg);box-shadow:0 0 15px #4c83ff99}
+.maproute:before{content:"";position:absolute;width:28px;height:28px;border-radius:50%;border:5px solid #fff;background:#4c83ff;left:50%;top:47%;transform:translate(-50%,-50%);box-shadow:0 2px 8px #000}
+.maptop{position:absolute;left:14px;right:14px;top:14px;display:flex;justify-content:space-between;gap:10px}
+.pill{background:#0a1115e8;border:1px solid #344047;border-radius:14px;padding:9px 12px}
+.pill b{font-size:13px}.pill small{display:block;color:var(--muted);margin-top:2px}
+.mapcontrols{position:absolute;right:14px;bottom:14px;display:flex;flex-direction:column;gap:8px}.round{width:48px;height:48px;border:1px solid #344047;background:#0a1115e8;color:#fff;border-radius:50%;font-size:21px}
+.destination{position:absolute;left:14px;bottom:14px;max-width:55%;padding:12px 14px;background:#0a1115e8;border:1px solid #344047;border-radius:16px}.destination b{font-size:14px}.destination small{display:block;color:var(--muted);margin-top:4px}
+.side{display:grid;grid-template-rows:1fr 1fr;gap:12px;min-height:0}
+.media{padding:16px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#10181d,#0b1014)}
+.mediahead{display:flex;justify-content:space-between;align-items:center}.mediahead b{font-size:17px}.mediaicon{width:58px;height:58px;border-radius:14px;background:#050708;display:grid;place-items:center;font-size:30px}
+.source{color:var(--muted);font-size:12px;margin-top:8px}.mediaactions{display:flex;gap:8px}.mediaactions button{flex:1;height:44px;border-radius:13px;border:1px solid #334047;background:#182126;color:#fff;font-weight:700}
+.weather{padding:16px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#132027,#0d1519)}.weather .temp{font-size:46px;font-weight:800;letter-spacing:-2px}.weather .condition{color:#cfd6da;font-size:15px}.weather .place{color:var(--muted);font-size:12px}
+.bottom{grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px}
+.status,.quick,.speed{padding:15px;display:flex;align-items:center;gap:13px}.status .big,.speed .big{font-size:30px;font-weight:800}.label{color:var(--muted);font-size:11px;margin-top:3px}.quick{justify-content:center}.quick button{height:52px;padding:0 18px;border-radius:15px;border:1px solid #344047;background:#182126;color:#fff;font-weight:800}.speed{justify-content:center}.speed .big{font-size:42px}.speed small{font-size:11px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111a1f;border:1px solid #3a464d;padding:10px 14px;border-radius:13px;color:#fff;font-size:12px;display:none;z-index:20}
+@media(max-width:850px){.shell{grid-template-columns:64px 1fr;padding:7px;gap:7px}.dock{border-radius:19px;padding:8px 5px}.dock button{width:46px;height:46px}.content{grid-template-columns:1fr 250px;grid-template-rows:1fr 112px;gap:7px}.bottom{gap:7px}.speed .big{font-size:32px}.weather .temp{font-size:38px}}
 </style>
 </head>
 <body>
-<div class="app">
-<section class="main">
-<div class="map"></div><div class="route"></div><div class="car">🚗</div>
-<header class="header">
-<div class="glass brand"><b>TIGOR DRIVE</b><small id="status">Ready for driving</small></div>
-<div class="stats">
-<div class="glass stat"><b id="speed">--</b><small>KM/H</small></div>
-<div class="glass stat"><b id="clock">--:--</b><small>TIME</small></div>
-<div class="glass stat"><b id="battery">--%</b><small>BATTERY</small></div>
+<div class="shell">
+<nav class="dock">
+<button id="mapsDock" class="active" title="Google Maps">🗺️</button>
+<button id="spotifyDock" title="Spotify">🎵</button>
+<button id="phoneDock" title="Phone">☎️</button>
+<button class="apps" id="homeDock" title="Dashboard">▦</button>
+</nav>
+
+<main class="content">
+<section class="card map">
+<div class="mapbg"></div><div class="maproute"></div>
+<div class="maptop">
+<div class="pill"><b>Google Maps</b><small id="gpsStatus">Waiting for GPS…</small></div>
+<div class="pill"><b id="clock">--:--</b><small id="battery">Battery --</small></div>
 </div>
-</header>
-<div class="glass navcard">
-<div class="navrow"><span class="turn">↗</span><div><b>Google Maps</b><small id="navhint">Tap below to start navigation</small></div></div>
-</div>
-<div class="glass help">Phone dashboard • landscape</div>
+<div class="destination"><b id="destination">Navigation</b><small id="navText">Tap the map button to open Google Maps.</small></div>
+<div class="mapcontrols"><button class="round" id="locate">⌖</button><button class="round" id="openMaps">↗</button></div>
 </section>
-<footer class="bottom">
-<div class="music"><div class="album">♫</div><div class="track"><b id="song">Spotify</b><small id="artist">Open Spotify to choose music</small></div></div>
-<div class="controls"><button class="btn" id="prev">⏮</button><button class="btn play" id="play">▶</button><button class="btn" id="next">⏭</button></div>
-<div class="launches"><button class="launch maps" id="maps">MAPS</button><button class="launch spotify" id="spotify">SPOTIFY</button></div>
-</footer>
+
+<section class="side">
+<div class="card media">
+<div><div class="mediahead"><b>Music</b><div class="mediaicon">♫</div></div><div class="source" id="musicText">Spotify — open Spotify to choose music</div></div>
+<div class="mediaactions"><button id="prev">⏮</button><button id="play">▶ Play</button><button id="next">⏭</button></div>
 </div>
+<div class="card weather">
+<div><div class="place" id="place">Current location</div><div class="temp" id="temp">--°</div><div class="condition" id="condition">Weather unavailable</div></div>
+<div class="place">No subscription • dashboard only</div>
+</div>
+</section>
+
+<section class="bottom">
+<div class="card status"><div class="big" id="statusIcon">●</div><div><b id="statusTitle">Tigor Drive</b><div class="label" id="statusText">Ready</div></div></div>
+<div class="card quick"><button id="openSpotify">OPEN SPOTIFY</button><button id="call">PHONE</button></div>
+<div class="card speed"><div class="big" id="speed">0</div><small>KM/H<br>GPS SPEED</small></div>
+</section>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+
 <script>
 const $=id=>document.getElementById(id);
-function updateClock(){$("clock").textContent=new Intl.DateTimeFormat([], {hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date())}
-setInterval(updateClock,1000);updateClock();
+function toast(t){const x=$("toast");x.textContent=t;x.style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>x.style.display="none",2200)}
+function openMaps(){
+  // Google Maps iOS deep link. If the app is not installed, fall back to the web.
+  const web="https://www.google.com/maps/";
+  const timer=setTimeout(()=>{location.href=web},900);
+  location.href="comgooglemaps://";
+  window.addEventListener("pagehide",()=>clearTimeout(timer),{once:true});
+}
+function openSpotify(){location.href="spotify:"}
+$("mapsDock").onclick=openMaps;$("openMaps").onclick=openMaps;$("locate").onclick=()=>{if(navigator.geolocation)navigator.geolocation.getCurrentPosition(p=>toast("GPS location refreshed"),()=>toast("Allow Location in Safari settings"))};
+$("spotifyDock").onclick=openSpotify;$("openSpotify").onclick=openSpotify;$("play").onclick=openSpotify;$("prev").onclick=openSpotify;$("next").onclick=openSpotify;
+$("phoneDock").onclick=()=>location.href="tel:";$("call").onclick=()=>location.href="tel:";
+$("homeDock").onclick=()=>toast("You're already on the dashboard");
 
-async function battery(){
- try{const b=await navigator.getBattery();$("battery").textContent=Math.round(b.level*100)+"%";b.addEventListener("levelchange",()=>$("battery").textContent=Math.round(b.level*100)+"%")}
- catch(e){$("battery").textContent="—"}
-} battery();
+function clock(){ $("clock").textContent=new Intl.DateTimeFormat([], {hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date())}
+setInterval(clock,1000);clock();
+
+(async()=>{try{const b=await navigator.getBattery();const f=()=>{$("battery").textContent="Battery "+Math.round(b.level*100)+"%"};f();b.addEventListener("levelchange",f)}catch(e){$("battery").textContent="Battery —"}})();
 
 if(navigator.geolocation){
  navigator.geolocation.watchPosition(p=>{
-   $("status").textContent="GPS connected";
-   const s=p.coords.speed;
-   $("speed").textContent=(typeof s==="number"&&s>=0)?Math.round(s*3.6):"0";
- },()=>{$("status").textContent="Allow Location for speed";$("speed").textContent="—"},
- {enableHighAccuracy:true,maximumAge:1500,timeout:7000});
+   $("gpsStatus").textContent="GPS connected";
+   $("statusText").textContent="GPS connected";
+   $("speed").textContent=(typeof p.coords.speed==="number"&&p.coords.speed>=0)?Math.round(p.coords.speed*3.6):"0";
+ },()=>{
+   $("gpsStatus").textContent="Location permission needed";
+   $("statusText").textContent="Allow Location for GPS speed";
+ },{enableHighAccuracy:true,maximumAge:1500,timeout:7000});
 }
-function launch(url){location.href=url}
-$("maps").onclick=()=>launch("comgooglemaps://");
-$("spotify").onclick=()=>launch("spotify:");
-$("play").onclick=()=>launch("spotify:");
-$("prev").onclick=()=>launch("spotify:");
-$("next").onclick=()=>launch("spotify:");
-$("navhint").onclick=()=>launch("comgooglemaps://");
+
+// Optional free weather via Open-Meteo (no API key). It runs only when GPS is available.
+let weatherLoaded=false;
+if(navigator.geolocation){
+ navigator.geolocation.getCurrentPosition(async p=>{
+   if(weatherLoaded)return; weatherLoaded=true;
+   const lat=p.coords.latitude,lon=p.coords.longitude;
+   try{
+     const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`);
+     const d=await r.json();
+     $("temp").textContent=Math.round(d.current.temperature_2m)+"°";
+     const codes={0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Cloudy",45:"Fog",48:"Fog",51:"Drizzle",53:"Drizzle",55:"Drizzle",61:"Rain",63:"Rain",65:"Heavy rain",80:"Showers",81:"Showers",82:"Heavy showers",95:"Thunderstorm"};
+     $("condition").textContent=codes[d.current.weather_code]||"Current weather";
+     $("place").textContent="Your current area";
+   }catch(e){}
+ },()=>{});
+}
 </script>
 </body></html>
